@@ -1,37 +1,35 @@
-# Dilema.ro Author Crawler
+# Dilema Veche Author Crawler
 
-A small Haskell CLI that reads the article titles displayed on Andrei Pleșu's
-author page and can fetch a selected essay to show a preview of up to 120 words.
-The full essay remains on Dilema.ro.
+A Rust CLI that lists the articles shown on
+[Teodor Baconschi's author page](https://www.dilema.ro/autor/teodor-baconschi), fetches a
+selected article for a preview of up to 120 words, or opens the original article
+in a browser. The full article remains on Dilema Veche.
 
 ## Running
 
-GHC, Cabal, and the `curl` utility are required. From this directory, run:
+Install Rust and Cargo, then run from this directory:
 
 ```sh
-cabal run dilema-crawler
+cargo run
 ```
 
 Available commands:
 
 ```sh
-cabal run dilema-crawler -- --list
-cabal run dilema-crawler -- --preview 1
-cabal run dilema-crawler -- --open 1
-cabal run dilema-crawler -- --help
+cargo run -- --list
+cargo run -- --preview 1
+cargo run -- --open 1
+cargo run -- --help
 ```
 
-On the first run, Cabal downloads the dependencies (`tagsoup` and `text`). The
-crawler uses `curl` for HTTPS requests. It fetches the author page and downloads
-an essay page only when you request a preview; it does not crawl the entire
-site automatically. The author page currently has no working pagination in its
-HTML, so the list includes the articles shown on the page at the time you run
-the crawler.
+The first run downloads the Rust dependencies. The crawler fetches the author
+page and downloads an article only when you request a preview; it does not
+crawl the entire site automatically. The list contains the articles present in
+the author page's HTML when you run it.
 
-In interactive mode, after selecting an article, you can choose to view its
-preview or open the original page in your browser. The `--open N` command uses
-`xdg-open` on Linux.
+In interactive mode, after selecting an article, choose `p` for a preview or
+`o` to open the original page. Opening a page uses `xdg-open` on Linux.
 
-Please respect Dilema.ro's `robots.txt` and terms if you extend the crawler or
-run it frequently. The preview is intentionally short and links to the
+Please respect Dilema Veche's `robots.txt` and terms if you extend the crawler
+or run it frequently. The preview is intentionally short and links to the
 original article.
